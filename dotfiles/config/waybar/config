@@ -1,0 +1,49 @@
+{
+  "layer": "top",
+  "position": "top",
+  "spacing": 4,
+  "modules-left": [ "hyprland/workspaces" ],
+  "modules-center": [ "clock" ],
+  "modules-right": [ "tray", "cpu", "memory", "network", "battery", "wireplumber" ],
+
+  "hyprland/workspaces": {
+    "format": "{icon} {windows}",
+    "format-icons": {
+      "active": "",
+      "empty": "",
+      "persistent": ""
+    },
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "title<.*firefox.*>": "󰈹",
+      "title<.*kitty.*>": "󰄛",
+      "title<.*discord.*>": "",
+      "title<.*steam.*>": "",
+      "title<.*spotify.*>": "",
+    },
+    "persistent-workspaces": {
+      "*": 3
+    }
+  },
+  "clock": {
+    "format": "{:%Y/%m/%d - %H:%M}"
+  },
+  "cpu": {
+    "format": "  {usage}%"
+  },
+  "memory": {
+    "format": "  {percentage}%"
+  },
+  "network": {
+    "format": "󰛶 {bandwidthUpBytes} 󰛴 {bandwidthDownBytes}"
+  },
+  "battery": {
+    "format": "󱊣 {capacity}%"
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "on-click": "helvum",
+    "format-icons": ["", "", ""]
+  }
+}
