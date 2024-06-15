@@ -132,7 +132,10 @@
     pkgs.gh
 
     # Communication
-  pkgs.signal-desktop
+    pkgs.signal-desktop
+
+    # Backups
+    pkgs.synology-drive-client
   ];
 
   environment.gnome.excludePackages = with pkgs.gnome; [
