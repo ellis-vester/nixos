@@ -130,6 +130,9 @@
 
     # Programming tools
     pkgs.gh
+
+    # Communication
+  pkgs.signal-desktop
   ];
 
   environment.gnome.excludePackages = with pkgs.gnome; [
