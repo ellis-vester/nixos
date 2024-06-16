@@ -40,7 +40,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
         user = "greeter";
       };
     };
@@ -125,6 +125,7 @@
 
     # Programming Languages
     pkgs.go
+    pkgs.delve
     pkgs.rustup
     pkgs.dotnetCorePackages.sdk_8_0_2xx
 
