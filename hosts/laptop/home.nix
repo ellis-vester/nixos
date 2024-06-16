@@ -17,6 +17,36 @@
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
+  gtk.enable = true;
+
+  gtk.cursorTheme.package = pkgs.nordzy-cursor-theme;
+  gtk.cursorTheme.name = "Nordzy-cursors";
+
+  gtk.iconTheme.package = pkgs.nordzy-icon-theme;
+  gtk.iconTheme.name = "Nordzy";
+
+  gtk.theme.package = pkgs.nordic;
+  gtk.theme.name = "Nordic";
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        user-themes.extensionUuid
+      ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "kitty.desktop"
+        "firefox.desktop" 
+        "signal-desktop.desktop" 
+        "spotify.desktop"
+        "discord.desktop"
+      ];
+    };
+    settings."org/gnome/shell/extensions/user-theme".name = "Nordic";
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -40,8 +70,12 @@
 
     shellIntegration.enableZshIntegration = true;
 
+    theme = "Nord";
+    font.name = "JetBrainsMono Nerd Font";
+
     settings = {
       shell = "zsh";
+      background_opacity = "0.85";
     };
   };
 

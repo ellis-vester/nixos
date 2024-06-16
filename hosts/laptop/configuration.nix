@@ -89,6 +89,10 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
+    # GNOME
+    pkgs.gnome.gnome-tweaks
+
+    # Utilities
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
     pkgs.xwayland
