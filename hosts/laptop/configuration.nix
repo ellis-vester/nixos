@@ -36,25 +36,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
-        user = "greeter";
-      };
-    };
-  };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -95,9 +76,6 @@
     };
   };
 
-  stylix.enable = true;
-  stylix.image = ../../dotfiles/wallpapers/mgs2-blue.jpeg;
-
   fonts = {
     fontconfig = {
       defaultFonts = {
@@ -111,17 +89,10 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
-    pkgs.hyprland
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
     pkgs.xwayland
-    pkgs.rofi-wayland
-    pkgs.waybar
-    pkgs.hyprpaper
-    pkgs.dunst
     pkgs.wireplumber
-    pkgs.greetd.tuigreet
-    pkgs.hyprshot
 
     # Programming Languages
     pkgs.go
@@ -152,5 +123,4 @@
     gnome-calendar
     gnome-contacts
   ];
-
 }

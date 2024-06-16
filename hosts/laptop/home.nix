@@ -14,9 +14,6 @@
 
   home.file = {
     ".config/nvim".source = ../../dotfiles/config/nvim;
-    ".config/hypr".source = ../../dotfiles/config/hypr;
-    ".config/waybar".source = ../../dotfiles/config/waybar;
-    ".config/rofi".source = ../../dotfiles/config/rofi;
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
@@ -47,17 +44,6 @@
       shell = "zsh";
     };
   };
- 
-  xdg.mimeApps.defaultApplications = {
-    "image/jpeg" = [ "gwenview" ];
-    "image/png" = [ "gwenview" ];
-  };
-
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-  stylix.autoEnable = true;
-  stylix.opacity.applications = 0.85;
-  stylix.opacity.terminal = 0.85;
-  stylix.targets.kde.enable = false;
 
   home.sessionVariables = {
     EDITOR = "nvim";
