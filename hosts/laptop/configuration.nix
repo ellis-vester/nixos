@@ -8,6 +8,9 @@
     [
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+
+      # Modules
+      ../../modules/nixos/hyprland.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -35,6 +38,8 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  hyprland.enable = true;
 
   # Configure keymap in X11
   services.xserver = {

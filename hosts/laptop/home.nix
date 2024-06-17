@@ -5,6 +5,10 @@
   home.homeDirectory = "/home/ellis";
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  imports = [
+    ../../modules/home-manager/hyprland.nix
+  ];
+
   home.packages = [
     pkgs.neovim
     pkgs.git
@@ -46,6 +50,8 @@
     };
     settings."org/gnome/shell/extensions/user-theme".name = "Nordic";
   };
+
+  hyprland.enable = true;
 
   programs.zsh = {
     enable = true;
