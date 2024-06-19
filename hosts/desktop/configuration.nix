@@ -38,6 +38,8 @@
 
   gnome.enable = true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -70,6 +72,13 @@
   
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Steam/Gaming
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   environment.systemPackages = [
     # Utilities

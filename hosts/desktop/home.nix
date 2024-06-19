@@ -8,6 +8,8 @@
   imports = [
     ../../modules/home-manager/hyprland.nix
     ../../modules/home-manager/gnome.nix
+    ../../modules/home-manager/terminal.nix
+    ../../modules/home-manager/themes.nix
   ];
 
   home.packages = [
@@ -23,68 +25,10 @@
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "frappe";
-  catppuccin.accent = "rosewater";
-  
-  gtk.enable = true;
-  gtk.catppuccin.enable = true;
-  gtk.catppuccin.flavor = "frappe";
-  gtk.catppuccin.accent = "rosewater";
-
-  gtk.catppuccin.icon.enable = false;
-
-  gtk.iconTheme.package = pkgs.nordzy-icon-theme;
-  gtk.iconTheme.name = "Nordzy";
-
   gnome.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    history = {
-      size = 100000;
-      path = "/home/ellis/zsh/history";
-    };
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "agnoster";
-    };
-  };
-
-  programs.kitty = {
-    enable = true;
-    catppuccin.enable = true;
-    catppuccin.flavor = "frappe";
-
-    shellIntegration.enableZshIntegration = true;
-
-    font.name = "JetBrainsMono Nerd Font";
-
-    settings = {
-      shell = "zsh";
-      background_opacity = "0.75";
-      hide_window_decorations = "yes";
-      background_blur = "40";
-    };
-  };
-
-  programs.spicetify =
-    let
-      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-    in
-    {
-      enable = true;
-      theme = spicePkgs.themes.catppuccin;
-      colorScheme = "frappe";
-      windowManagerPatch = true;
-    };
-
+  themes.enable = true;
+  terminal.enable = true;
+ 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
