@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, catppuccin, inputs, ... }:
 
 {
   home.username = "ellis";
@@ -7,51 +7,37 @@
 
   imports = [
     ../../modules/home-manager/hyprland.nix
+    ../../modules/home-manager/gnome.nix
   ];
 
   home.packages = [
     pkgs.neovim
     pkgs.git
     pkgs.gcc
+    pkgs.catppuccin-gtk
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   home.file = {
-    ".config/nvim".source = ../../dotfiles/config/nvim;
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink ../../dotfiles/config/nvim;
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
+  catppuccin.enable = true;
+  catppuccin.flavor = "frappe";
+  catppuccin.accent = "rosewater";
+  
   gtk.enable = true;
+  gtk.catppuccin.enable = true;
+  gtk.catppuccin.flavor = "frappe";
+  gtk.catppuccin.accent = "rosewater";
 
-  gtk.cursorTheme.package = pkgs.nordzy-cursor-theme;
-  gtk.cursorTheme.name = "Nordzy-cursors";
+  gtk.catppuccin.icon.enable = false;
 
   gtk.iconTheme.package = pkgs.nordzy-icon-theme;
   gtk.iconTheme.name = "Nordzy";
 
-  gtk.theme.package = pkgs.nordic;
-  gtk.theme.name = "Nordic";
-
-  dconf = {
-    enable = true;
-    settings."org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = with pkgs.gnomeExtensions; [
-        user-themes.extensionUuid
-      ];
-      favorite-apps = [
-        "org.gnome.Nautilus.desktop"
-        "kitty.desktop"
-        "firefox.desktop" 
-        "signal-desktop.desktop" 
-        "spotify.desktop"
-        "discord.desktop"
-      ];
-    };
-    settings."org/gnome/shell/extensions/user-theme".name = "Nordic";
-  };
-
-  hyprland.enable = true;
+  gnome.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -73,17 +59,31 @@
 
   programs.kitty = {
     enable = true;
+    catppuccin.enable = true;
+    catppuccin.flavor = "frappe";
 
     shellIntegration.enableZshIntegration = true;
 
-    theme = "Nord";
     font.name = "JetBrainsMono Nerd Font";
 
     settings = {
       shell = "zsh";
-      background_opacity = "0.85";
+      background_opacity = "0.75";
+      hide_window_decorations = "yes";
+      background_blur = "40";
     };
   };
+
+  programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    in
+    {
+      enable = true;
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "frappe";
+      windowManagerPatch = true;
+    };
 
   home.sessionVariables = {
     EDITOR = "nvim";

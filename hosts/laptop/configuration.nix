@@ -3,7 +3,8 @@
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.05";
-  
+  home-manager.useGlobalPkgs = true;
+
   imports =
     [
       ./hardware-configuration.nix
@@ -11,6 +12,7 @@
 
       # Modules
       ../../modules/nixos/hyprland.nix
+      ../../modules/nixos/gnome.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -35,11 +37,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  hyprland.enable = true;
+  gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -68,17 +66,7 @@
       discord
       kitty
       neofetch
-      spotify
     ];
-  };
-
-  home-manager = {
-    extraSpecialArgs = { 
-      inherit inputs;
-    };
-    users = {
-      "ellis" = import ./home.nix;
-    };
   };
 
   fonts = {
@@ -90,13 +78,9 @@
   };
 
   programs.firefox.enable = true;
-
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
-    # GNOME
-    pkgs.gnome.gnome-tweaks
-
     # Utilities
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
@@ -117,19 +101,5 @@
 
     # Backups
     pkgs.synology-drive-client
-  ];
-
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    baobab
-    cheese
-    eog
-    epiphany
-    simple-scan
-    totem
-    evince
-    geary
-    seahorse
-    gnome-calendar
-    gnome-contacts
   ];
 }

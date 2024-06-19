@@ -907,6 +907,7 @@ require('lazy').setup({
       'williamboman/mason.nvim',
     },
   },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     'gbprod/nord.nvim',
   },
@@ -1003,4 +1004,10 @@ require('nord').setup {
   transparent = true,
 }
 
-vim.cmd.colorscheme 'nord'
+require("catppuccin").setup({
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    transparent_background = true, -- disables setting the background color.
+})
+
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
