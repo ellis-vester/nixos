@@ -33,5 +33,24 @@
         }
       ];
     };
+    
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/desktop/configuration.nix
+        inputs.home-manager.nixosModules.default
+        catppuccin.nixosModules.catppuccin
+        home-manager.nixosModules.home-manager {
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.users.ellis = {
+            imports = [
+              ./hosts/desktop/home.nix
+              catppuccin.homeManagerModules.catppuccin
+              inputs.spicetify-nix.homeManagerModules.default
+            ];
+          };
+        }
+      ];
+    };
   };
 }
