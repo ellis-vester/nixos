@@ -2,7 +2,7 @@
 
 {
   options = {
-    neovim.enable = lib.mkEnableOption "Install and configures Neovim";
+    neovim.enable = lib.mkEnableOption "install and configure Neovim";
   };
 
   config = lib.mkIf config.neovim.enable {

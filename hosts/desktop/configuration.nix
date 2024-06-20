@@ -87,15 +87,6 @@
     pkgs.xwayland
     pkgs.wireplumber
 
-    # Programming Languages
-    pkgs.go
-    pkgs.delve
-    pkgs.rustup
-    pkgs.dotnetCorePackages.sdk_8_0_2xx
-
-    # Programming tools
-    pkgs.gh
-
     # Communication
     pkgs.signal-desktop
 

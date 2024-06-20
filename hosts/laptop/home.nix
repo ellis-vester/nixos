@@ -11,10 +11,10 @@
     ../../modules/home-manager/terminal.nix
     ../../modules/home-manager/themes.nix
     ../../modules/home-manager/neovim.nix
+    ../../modules/home-manager/development.nix
   ];
 
   home.packages = [
-    pkgs.git
     pkgs.gcc
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
@@ -28,6 +28,7 @@
   themes.enable = true;
   terminal.enable = true;
   neovim.enable = true;
+  development.enable = true;
 
   programs.home-manager.enable = true;
 }
