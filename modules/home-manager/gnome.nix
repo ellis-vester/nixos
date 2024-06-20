@@ -2,15 +2,16 @@
 
 {
   options = {
-    gnome.enable = lib.mkEnableOption "configures GDM and GNOME";
+    gnome.enable = lib.mkEnableOption "Install and configure GDM and GNOME";
   };
 
   config = lib.mkIf config.gnome.enable {
 
-    home.packages = with pkgs.gnomeExtensions; [
-      user-themes
-      forge
-      blur-my-shell
+    home.packages = with pkgs; [
+      gnomeExtensions.user-themes
+      gnomeExtensions.forge
+      gnomeExtensions.blur-my-shell
+      catppuccin-gtk
     ];
 
     home.file = {
