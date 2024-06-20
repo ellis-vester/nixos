@@ -63,11 +63,6 @@
     isNormalUser = true;
     description = "ellis";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      discord
-      kitty
-      neofetch
-    ];
   };
   
   # Install firefox.
@@ -86,9 +81,6 @@
     pkgs.xdg-desktop-portal-hyprland
     pkgs.xwayland
     pkgs.wireplumber
-
-    # Communication
-    pkgs.signal-desktop
 
     # Backups
     pkgs.synology-drive-client

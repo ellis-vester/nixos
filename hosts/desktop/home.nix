@@ -12,6 +12,7 @@
     ../../modules/home-manager/themes.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/development.nix
+    ../../modules/home-manager/social.nix
   ];
 
   home.packages = [
@@ -29,6 +30,7 @@
   terminal.enable = true;
   neovim.enable = true;
   development.enable = true;
+  social.enable = true;
 
   programs.home-manager.enable = true;
 }

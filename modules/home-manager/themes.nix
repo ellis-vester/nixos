@@ -5,8 +5,9 @@
     themes.enable = lib.mkEnableOption "configures themes for applications and DE";
   };
 
-  config = {
+  config = lib.mkIf config.themes.enable {
     home.packages = with pkgs; [
+      neofetch
       catppuccin-gtk
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
