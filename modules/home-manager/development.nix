@@ -13,6 +13,7 @@
       dotnetCorePackages.sdk_8_0_2xx
       git
       gh
+      terraform
     ];
   };
 }
