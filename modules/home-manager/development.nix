@@ -14,6 +14,8 @@
       git
       gh
       terraform
+      packer
+      awscli2
     ];
   };
 }
