@@ -74,6 +74,9 @@
         monospace = [ "JetBrainsMono"];
       };
     };
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+    ];
   };
 
   # Install firefox.
