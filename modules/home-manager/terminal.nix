@@ -31,7 +31,7 @@
 
       shellIntegration.enableZshIntegration = true;
 
-      font.name = "JetBrainsMono Nerd Font";
+      font.name = "JetBrainsMono";
 
       settings = {
         shell = "zsh";

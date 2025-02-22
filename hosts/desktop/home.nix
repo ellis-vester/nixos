@@ -17,7 +17,11 @@
 
   home.packages = [
     pkgs.gcc
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    pkgs.darktable
+    pkgs.obsidian
+    pkgs.calibre
+    pkgs.buckets
+    pkgs.nerd-fonts.jetbrains-mono
   ];
 
   home.file = {

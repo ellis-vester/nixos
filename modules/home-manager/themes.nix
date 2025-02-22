@@ -9,7 +9,7 @@
     home.packages = with pkgs; [
       neofetch
       catppuccin-gtk
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
     ];
 
     home.file = {

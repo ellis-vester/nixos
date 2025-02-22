@@ -37,6 +37,14 @@
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
+        {
+          nixpkgs.config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [
+              "dotnet-sdk-6.0.428"
+            ];
+          };
+        }
         ./hosts/desktop/configuration.nix
         inputs.home-manager.nixosModules.default
         catppuccin.nixosModules.catppuccin

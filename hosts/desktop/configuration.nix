@@ -64,7 +64,16 @@
     description = "ellis";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-  
+
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "JetBrainsMono"];
+      };
+    };
+  };
+
   # Install firefox.
   programs.firefox.enable = true;
 
