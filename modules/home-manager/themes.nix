@@ -20,12 +20,12 @@
     catppuccin.flavor = "frappe";
     catppuccin.accent = "rosewater";
 
-    gtk.enable = true;
-    gtk.catppuccin.enable = true;
-    gtk.catppuccin.flavor = "frappe";
-    gtk.catppuccin.accent = "rosewater";
+    catppuccin.gtk.enable = true;
+    catppuccin.gtk.icon.enable = false;
+    
+    catppuccin.kitty.enable = true;
 
-    gtk.catppuccin.icon.enable = false;
+    gtk.enable = true;
 
     gtk.iconTheme.package = pkgs.nordzy-icon-theme;
     gtk.iconTheme.name = "Nordzy";

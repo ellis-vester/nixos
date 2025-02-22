@@ -26,8 +26,6 @@
 
     programs.kitty = {
       enable = true;
-      catppuccin.enable = true;
-      catppuccin.flavor = "frappe";
 
       shellIntegration.enableZshIntegration = true;
 
