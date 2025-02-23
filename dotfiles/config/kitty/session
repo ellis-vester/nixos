@@ -2,3 +2,5 @@ layout fat
 launch nvim
 launch zsh
 resize_window shorter 16
+
+new_tab terminal
