@@ -1009,6 +1009,10 @@ require("catppuccin").setup({
     transparent_background = true, -- disables setting the background color.
 })
 
+require("neo-tree").setup({
+  close_if_last_window = true
+})
+
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
 vim.cmd("Neotree show")
