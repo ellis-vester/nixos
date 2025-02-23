@@ -29,12 +29,17 @@
 
       shellIntegration.enableZshIntegration = true;
 
-      font.name = "JetBrainsMono";
+      font.name = "JetBrainsMono Nerd Font";
 
       settings = {
         shell = "zsh";
         background_opacity = "0.75";
         hide_window_decorations = "yes";
+      };
+
+      keybindings = {
+        "ctrl+c" = "copy_or_interrupt";
+        "ctrl+v" = "paste_from_clipboard";
       };
     };
   };
