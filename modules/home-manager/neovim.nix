@@ -8,6 +8,8 @@
   config = lib.mkIf config.neovim.enable {
     home.packages = with pkgs; [
       neovim
+      unzip   # required for stylua
+      ripgrep # required for treesitter
     ];
 
     home.file = {
