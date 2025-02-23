@@ -24,6 +24,10 @@
       };
     };
 
+    home.file = {
+      ".config/kitty-session".source = ../../dotfiles/config/kitty;
+    };
+
     programs.kitty = {
       enable = true;
 
@@ -35,11 +39,15 @@
         shell = "zsh";
         background_opacity = "0.75";
         hide_window_decorations = "yes";
+        startup_session = "../kitty-session/session";
       };
 
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+v" = "paste_from_clipboard";
+
+        "ctrl+shift+j" = "previous_window";
+        "ctrl+shift+k" = "next_window";
       };
     };
   };
