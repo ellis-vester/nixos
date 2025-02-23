@@ -38,7 +38,21 @@
 
   gnome.enable = true;
 
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+  };
+
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -95,8 +109,34 @@
     pkgs.xdg-desktop-portal-hyprland
     pkgs.xwayland
     pkgs.wireplumber
+    pkgs.dig
 
     # Backups
     pkgs.synology-drive-client
   ];
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = "${inputs.self.outPath}#desktop";
+    flags = [
+      "--recreate-lock-file"
+      "--commit-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "Mon *-*-* 04:15:00";
+    randomizedDelaySec = "15min";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [
+      "09:00"
+    ];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "Mon *-*-* 12:00:00";
+    options = "--delete-older-than 30d";
+  };
 }
