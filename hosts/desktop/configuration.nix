@@ -119,7 +119,6 @@
     enable = true;
     flake = "${inputs.self.outPath}#desktop";
     flags = [
-      "--recreate-lock-file"
       "--commit-lock-file"
       "-L" # print build logs
     ];
