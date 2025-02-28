@@ -36,5 +36,12 @@
   development.enable = true;
   social.enable = true;
 
+  programs.librewolf = {
+    enable = true;
+    settings = {
+      "identity.fxaccounts.enabled" = true;
+    };
+  };
+
   programs.home-manager.enable = true;
 }

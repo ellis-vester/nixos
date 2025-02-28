@@ -93,9 +93,6 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Steam/Gaming
   programs.steam = {
     enable = true;
