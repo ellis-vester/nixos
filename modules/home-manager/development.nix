@@ -11,14 +11,20 @@
       go
       delve
       rustup
-      dotnetCorePackages.sdk_8_0_3xx
       git
       gh
       terraform
       packer
       awscli2
-      vscode
+      vscode-fhs
       godot_4-mono
+      lua
+      lua-language-server
+      stylua
+
+      # Dotnet
+      dotnetCorePackages.sdk_8_0_3xx
+      csharp-ls
     ];
   };
 }
