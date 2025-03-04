@@ -1,7 +1,10 @@
 # hyprland.nix
-{ pkgs, lib, config, ... }: 
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
     hyprland.enable = lib.mkEnableOption "enables hyprland module";
   };
@@ -25,4 +28,3 @@
     ];
   };
 }
-

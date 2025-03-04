@@ -25,10 +25,15 @@ require('neo-tree').setup {
       visible = true,
     },
     group_empty_dirs = true,
+    window = {
+      mappings = {
+        ["e"] = "expand_all_nodes"
+      }
+    }
   },
 }
 
-vim.keymap.set('n', '<leader>ns', '<Cmd>Neotree show<CR>')
-vim.keymap.set('n', '<leader>nc', '<Cmd>Neotree close<CR>')
+vim.keymap.set('n', '<leader>ns', '<Cmd>Neotree show<CR>', { desc = '[N]eotree [S]how' })
+vim.keymap.set('n', '<leader>nc', '<Cmd>Neotree close<CR>', { desc = '[N]eotree [C]lose' })
 
 vim.cmd 'Neotree show'

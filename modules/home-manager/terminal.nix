@@ -1,27 +1,37 @@
-{ config, pkgs, inputs, lib, ...}:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options = {
     terminal.enable = lib.mkEnableOption "configures kitty and zsh";
   };
 
   config = lib.mkIf config.terminal.enable {
+    xdg.enable = true;
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      dotDir = ".config/zsh/";
+
+      shellAliases = {
+        ednv = "nvim /home/ellis/nixos/dotfiles/config/nvim/init.lua";
+        ednx = "cd /home/ellis/nixos/ && nvim /home/ellis/nixos/flake.nix";
+      };
 
       history = {
         size = 100000;
-        path = "/home/ellis/zsh/history";
+        path = "${config.home.sessionVariables.XDG_CACHE_HOME}/zsh/.zsh_history";
       };
+    };
 
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" ];
-        theme = "agnoster";
-      };
+    programs.oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
+      useTheme = "catppuccin";
     };
 
     home.file = {
@@ -38,7 +48,7 @@
       settings = {
         shell = "zsh";
         background_opacity = "0.75";
-        hide_window_decorations = "yes";
+        hide_window_decorations = "no";
         startup_session = "../kitty-session/session";
       };
 

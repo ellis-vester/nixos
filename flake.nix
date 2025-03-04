@@ -14,15 +14,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, catppuccin, home-manager, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    catppuccin,
+    home-manager,
+    ...
+  } @ inputs: {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         ./hosts/laptop/configuration.nix
         inputs.home-manager.nixosModules.default
         catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager {
-          home-manager.extraSpecialArgs = { inherit inputs; };
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.ellis = {
             imports = [
               ./hosts/laptop/home.nix
@@ -33,9 +40,9 @@
         }
       ];
     };
-    
+
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         {
           nixpkgs.config = {
@@ -48,8 +55,9 @@
         ./hosts/desktop/configuration.nix
         inputs.home-manager.nixosModules.default
         catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager {
-          home-manager.extraSpecialArgs = { inherit inputs; };
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.ellis = {
             imports = [
               ./hosts/desktop/home.nix

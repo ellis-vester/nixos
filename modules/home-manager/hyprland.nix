@@ -1,6 +1,8 @@
-{ config, pkgs, lib, ...}:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options = {
     hyprland.enable = lib.mkEnableOption "enables hyperland module";
   };

@@ -1,12 +1,14 @@
-{ pkgs, lib, config, ...}:
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
     gnome.enable = lib.mkEnableOption "Install and configure GDM and GNOME";
   };
 
   config = lib.mkIf config.gnome.enable {
-
     home.packages = with pkgs; [
       gnomeExtensions.user-themes
       gnomeExtensions.forge
@@ -30,7 +32,7 @@
         favorite-apps = [
           "org.gnome.Nautilus.desktop"
           "kitty.desktop"
-          "firefox.desktop"
+          "librewolf.desktop"
           "signal-desktop.desktop"
           "spotify.desktop"
           "discord.desktop"

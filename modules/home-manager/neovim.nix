@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ...}:
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
     neovim.enable = lib.mkEnableOption "install and configure Neovim";
   };
@@ -8,7 +11,7 @@
   config = lib.mkIf config.neovim.enable {
     home.packages = with pkgs; [
       neovim
-      unzip   # required for stylua
+      unzip # required for stylua
       ripgrep # required for treesitter
     ];
 

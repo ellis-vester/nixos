@@ -1,6 +1,7 @@
-{ config, pkgs, catppuccin, inputs, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   home.username = "ellis";
   home.homeDirectory = "/home/ellis";
   home.stateVersion = "24.05"; # Please read the comment before changing.
@@ -22,6 +23,8 @@
     pkgs.calibre
     pkgs.buckets
     pkgs.nerd-fonts.jetbrains-mono
+    pkgs.protonvpn-gui
+    pkgs.btop
   ];
 
   home.file = {

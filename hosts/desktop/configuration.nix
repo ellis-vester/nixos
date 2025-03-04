@@ -1,24 +1,24 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   system.stateVersion = "24.05";
   home-manager.useGlobalPkgs = true;
   nixpkgs.config.allowUnfree = true;
 
-  imports =
-    [
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
-      # Modules
-      ../../modules/nixos/hyprland.nix
-      ../../modules/nixos/gnome.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+
+    # Modules
+    ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/gnome.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -43,7 +43,7 @@
     enable = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -74,18 +74,30 @@
   };
 
   hardware.bluetooth.enable = true;
-  
+
   users.users.ellis = {
     isNormalUser = true;
     description = "ellis";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
+  };
+
+  environment.variables = rec {
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+
+    XDG_BIN_HOME = "$HOME/.local/bin";
+    PATH = [
+      "${XDG_BIN_HOME}"
+    ];
   };
 
   fonts = {
     enableDefaultPackages = true;
     fontconfig = {
       defaultFonts = {
-        monospace = [ "JetBrainsMono"];
+        monospace = ["JetBrainsMono"];
       };
     };
     packages = with pkgs; [

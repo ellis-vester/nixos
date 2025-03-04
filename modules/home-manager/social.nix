@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ...}:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options = {
     social.enable = lib.mkEnableOption "installs and configures social/comms apps";
   };
