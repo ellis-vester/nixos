@@ -14,6 +14,7 @@
       # Go
       go
       delve
+      gopls
 
       # Rust
       rustup
