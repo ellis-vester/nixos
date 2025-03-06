@@ -42,6 +42,9 @@
       dotnetCorePackages.sdk_8_0_3xx
       csharp-ls
       csharpier
+
+      # Other
+      sqlite
     ];
   };
 }
