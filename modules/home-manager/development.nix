@@ -45,6 +45,7 @@
 
       # Other
       sqlite
+      sqlitebrowser
     ];
   };
 }
