@@ -20,6 +20,7 @@
       shellAliases = {
         ednv = "cd /home/ellis/nixos/dotfiles/config/nvim/ && nvim /home/ellis/nixos/dotfiles/config/nvim/init.lua";
         ednx = "cd /home/ellis/nixos/ && nvim /home/ellis/nixos/flake.nix";
+        no-sleepy = "xset -dpms";
       };
 
       history = {
