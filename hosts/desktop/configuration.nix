@@ -122,7 +122,19 @@
 
     # Backups
     pkgs.synology-drive-client
+
+    # AV
+    pkgs.clamav
   ];
+
+  services.clamav.daemon.enable = true;
+  services.clamav.updater.enable = true;
+
+  services.clamav.daemon.settings = {
+    OnAccessPrevention = true;
+    OnAccessIncludePath = "/home/ellis/Downloads";
+    OnAccessExcludeUname = "clamav";
+  };
 
   system.autoUpgrade = {
     enable = true;
