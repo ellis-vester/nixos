@@ -25,6 +25,7 @@
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.protonvpn-gui
     pkgs.btop
+    pkgs.strawberry
   ];
 
   home.file = {

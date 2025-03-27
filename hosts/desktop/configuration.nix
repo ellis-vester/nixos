@@ -112,6 +112,13 @@
     dedicatedServer.openFirewall = true;
   };
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-tty;
+  };
+  services.pcscd.enable = true;
+
   environment.systemPackages = [
     # Utilities
     pkgs.xdg-desktop-portal-gtk
@@ -119,13 +126,34 @@
     pkgs.xwayland
     pkgs.wireplumber
     pkgs.dig
+    pkgs.openssl
+    pkgs.pkg-config
+    pkgs.bws
 
     # Backups
     pkgs.synology-drive-client
 
     # AV
     pkgs.clamav
+
+    # Containers
+    pkgs.podman-tui
+    pkgs.podman-compose
   ];
+
+  # Enable common container config files in /etc/containers
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;

@@ -9,7 +9,13 @@
   };
 
   config = lib.mkIf config.development.enable {
+
+
     home.packages = with pkgs; [
+
+      # Containers
+      kubectl
+      pass
 
       # Go
       go
@@ -17,7 +23,10 @@
       gopls
 
       # Rust
-      rustup
+      cargo
+      rustfmt
+      rustc
+      rust-analyzer
 
       # Git
       git
