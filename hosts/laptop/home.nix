@@ -6,6 +6,7 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   imports = [
+    ../../modules/home-manager/core.nix
     ../../modules/home-manager/hyprland.nix
     ../../modules/home-manager/gnome.nix
     ../../modules/home-manager/terminal.nix
@@ -24,6 +25,7 @@
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
+  core.enable = true;
   gnome.enable = true;
   hyprland.enable = false;
   themes.enable = true;

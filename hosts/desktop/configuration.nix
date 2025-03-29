@@ -16,9 +16,17 @@
     inputs.home-manager.nixosModules.default
 
     # Modules
-    ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/antivirus.nix
+    ../../modules/nixos/core.nix
+    ../../modules/nixos/development.nix
     ../../modules/nixos/gnome.nix
+    ../../modules/nixos/hyprland.nix
   ];
+
+  antivirus.enable = true;
+  core.enable = true;
+  development.enable = true;
+  gnome.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -36,8 +44,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  gnome.enable = true;
-
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
@@ -54,114 +60,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  hardware.bluetooth.enable = true;
-
-  users.users.ellis = {
-    isNormalUser = true;
-    description = "ellis";
-    extraGroups = ["networkmanager" "wheel"];
-  };
-
-  environment.variables = rec {
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_STATE_HOME = "$HOME/.local/state";
-
-    XDG_BIN_HOME = "$HOME/.local/bin";
-    PATH = [
-      "${XDG_BIN_HOME}"
-    ];
-  };
-
-  fonts = {
-    enableDefaultPackages = true;
-    fontconfig = {
-      defaultFonts = {
-        monospace = ["JetBrainsMono"];
-      };
-    };
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-    ];
-  };
-
   # Steam/Gaming
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-tty;
-  };
-  services.pcscd.enable = true;
-
-  environment.systemPackages = [
-    # Utilities
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.xwayland
-    pkgs.wireplumber
-    pkgs.dig
-    pkgs.openssl
-    pkgs.pkg-config
-    pkgs.bws
-
-    # Backups
-    pkgs.synology-drive-client
-
-    # AV
-    pkgs.clamav
-
-    # Containers
-    pkgs.podman-tui
-    pkgs.podman-compose
-  ];
-
-  # Enable common container config files in /etc/containers
-  virtualisation.containers.enable = true;
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
-
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
-
-  services.clamav.daemon.settings = {
-    OnAccessPrevention = true;
-    OnAccessIncludePath = "/home/ellis/Downloads";
-    OnAccessExcludeUname = "clamav";
   };
 
   system.autoUpgrade = {

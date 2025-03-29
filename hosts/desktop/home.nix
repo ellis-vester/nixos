@@ -7,6 +7,7 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   imports = [
+    ../../modules/home-manager/core.nix
     ../../modules/home-manager/hyprland.nix
     ../../modules/home-manager/gnome.nix
     ../../modules/home-manager/terminal.nix
@@ -17,21 +18,15 @@
   ];
 
   home.packages = [
-    pkgs.gcc
     pkgs.darktable
-    pkgs.obsidian
-    pkgs.calibre
     pkgs.buckets
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.protonvpn-gui
-    pkgs.btop
-    pkgs.strawberry
   ];
 
   home.file = {
     ".config/wallpapers".source = ../../dotfiles/wallpapers;
   };
 
+  core.enable = true;
   gnome.enable = true;
   hyprland.enable = false;
   themes.enable = true;
@@ -39,13 +34,6 @@
   neovim.enable = true;
   development.enable = true;
   social.enable = true;
-
-  programs.librewolf = {
-    enable = true;
-    settings = {
-      "identity.fxaccounts.enabled" = true;
-    };
-  };
 
   programs.home-manager.enable = true;
 }

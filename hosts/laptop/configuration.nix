@@ -1,19 +1,32 @@
-{ config, pkgs, inputs, ... }:
-
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   system.stateVersion = "24.05";
   home-manager.useGlobalPkgs = true;
+  nixpkgs.config.allowUnfree = true;
 
-  imports =
-    [
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
-      # Modules
-      ../../modules/nixos/hyprland.nix
-      ../../modules/nixos/gnome.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+
+    # Modules
+    ../../modules/nixos/antivirus.nix
+    ../../modules/nixos/core.nix
+    ../../modules/nixos/development.nix
+    ../../modules/nixos/gnome.nix
+    ../../modules/nixos/hyprland.nix
+  ];
+
+  antivirus.enable = true;
+  core.enable = true;
+  development.enable = true;
+  gnome.enable = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -24,10 +37,10 @@
     "/crypto_keyfile.bin" = null;
   };
 
-  boot.loader.grub.enableCryptodisk=true;
+  boot.loader.grub.enableCryptodisk = true;
 
   boot.initrd.luks.devices."luks-de84fb01-2fcc-462a-aace-9ae439573ad2".keyFile = "/crypto_keyfile.bin";
-  
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -37,52 +50,27 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  services.printing.enable = true;
-
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
+  system.autoUpgrade = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    flake = "${inputs.self.outPath}#desktop";
+    flags = [
+      "--commit-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "Mon *-*-* 04:15:00";
+    randomizedDelaySec = "15min";
   };
 
-  hardware.bluetooth.enable = true;
-  
-  users.users.ellis = {
-    isNormalUser = true;
-    description = "ellis";
-    extraGroups = [ "networkmanager" "wheel" ];
+  nix.optimise = {
+    automatic = true;
+    dates = [
+      "09:00"
+    ];
   };
 
-  fonts = {
-    fontconfig = {
-      defaultFonts = {
-        monospace = [ "JetBrainsMono Nerd Font" ];
-      };
-    };
+  nix.gc = {
+    automatic = true;
+    dates = "Mon *-*-* 12:00:00";
+    options = "--delete-older-than 30d";
   };
-
-  programs.firefox.enable = true;
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = [
-    # Utilities
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.xwayland
-    pkgs.wireplumber
-
-    # Backups
-    pkgs.synology-drive-client
-  ];
 }

@@ -10,12 +10,7 @@
 
   config = lib.mkIf config.development.enable {
 
-
     home.packages = with pkgs; [
-
-      # Containers
-      kubectl
-      pass
 
       # Go
       go
@@ -36,6 +31,8 @@
       terraform
       terraform-ls
       packer
+
+      # AWS
       awscli2
 
       # Nix
