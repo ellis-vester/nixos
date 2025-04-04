@@ -46,7 +46,8 @@
     users.users.ellis = {
       isNormalUser = true;
       description = "ellis";
-      extraGroups = ["networkmanager" "wheel"];
+      # libvirtd required for virtualization
+      extraGroups = ["networkmanager" "wheel" "libvirtd"];
     };
 
     environment.variables = rec {

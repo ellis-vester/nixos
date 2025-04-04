@@ -67,6 +67,16 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # Virtual Machines
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["ellis"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  # Keyboard Setup
+  hardware.keyboard.zsa.enable = true;
+  environment.systemPackages = with pkgs; [ keymapp ];
+
   system.autoUpgrade = {
     enable = true;
     flake = "${inputs.self.outPath}#desktop";

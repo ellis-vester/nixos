@@ -18,6 +18,9 @@
 
       # Containers
       pkgs.podman-compose
+      pkgs.minikube
+      pkgs.kubectl
+      pkgs.docker-machine-kvm2
     ];
 
     # Enable common container config files in /etc/containers

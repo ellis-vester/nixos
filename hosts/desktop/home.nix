@@ -36,4 +36,12 @@
   social.enable = true;
 
   programs.home-manager.enable = true;
+
+  # Virtual Machines
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
 }
